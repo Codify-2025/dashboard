@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class DashboardService {
+    private static  final double SIMILARITY_THRESHOLD = 0.8;
+    private static  final double WEIGHT_MULTIPLIER = 10;
 
     private final AssignmentRepository assignmentRepository;
     private final SubmissionRepository submissionRepository;
@@ -49,9 +51,9 @@ public class DashboardService {
                         Collectors.averagingDouble(FindResultDto::accumulateResult)
                 ));
 
-        //3. 0.8이상인 데이터 개수 계산
+        //3. SIMILARITY_THRESHOLD이상인 데이터 개수 계산
         Map<String, Long> counts = rawData.stream()
-                .filter(dto -> dto.accumulateResult() > 0.8)
+                .filter(dto -> dto.accumulateResult() > SIMILARITY_THRESHOLD)
                 .collect(Collectors.groupingBy(
                         dto -> dto.studentFromId() + "-" + dto.studentToId(),
                         Collectors.counting()
@@ -70,7 +72,7 @@ public class DashboardService {
                                     Long.parseLong(ids[1]),
                                     count.intValue(),
                                     entry.getValue(),
-                                    count + entry.getValue() * 10
+                                    entry.getValue() * WEIGHT_MULTIPLIER
                             );
                         })
                         .collect(Collectors.toList());
@@ -106,7 +108,7 @@ public class DashboardService {
                                             dto.getSubmissionFromTime(),
                                             dto.getSubmissionToTime(),
                                             dto.getAccumulateResult(),
-                                            dto.getAccumulateResult() * 10
+                                            dto.getAccumulateResult() *  WEIGHT_MULTIPLIER
                                     ))
                                     .collect(Collectors.toList());
                     return new WeekDataDto(week, edgeList);
