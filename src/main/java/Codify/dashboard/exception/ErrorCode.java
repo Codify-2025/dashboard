@@ -12,6 +12,7 @@ public enum ErrorCode {
 
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "A1", "존재하지 않는 아티클입니다.");
 
+
     private final HttpStatus status; //http 상태 코드
     private final String code; //에러 구분 코드
     private final String message; //사용자에게 보여줄 에러 메시지
