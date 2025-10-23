@@ -5,18 +5,10 @@ spring:
   application:
     name: dashboard
   datasource:
-    write:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
-      pool-name: write-pool
-    read:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
-      pool-name: read-pool
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_SCHEMA}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     database: mysql
