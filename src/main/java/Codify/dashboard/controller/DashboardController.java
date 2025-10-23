@@ -1,8 +1,8 @@
 package Codify.dashboard.controller;
 
-import Codify.dashboard.dto.response.all.DashboardAllResponseDto;
-import Codify.dashboard.dto.response.data.DashboardDataDto;
-import Codify.dashboard.dto.response.week.DashboardWeekResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.DashboardAllResponseDto;
+import Codify.dashboard.dto.dashboard.response.data.DashboardDataDto;
+import Codify.dashboard.dto.dashboard.response.week.DashboardWeekResponseDto;
 import Codify.dashboard.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

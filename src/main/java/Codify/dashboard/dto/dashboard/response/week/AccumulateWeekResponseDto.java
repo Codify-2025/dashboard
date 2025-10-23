@@ -1,4 +1,4 @@
-package Codify.dashboard.dto.response.week;
+package Codify.dashboard.dto.dashboard.response.week;
 
 import java.time.LocalDateTime;
 
