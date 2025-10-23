@@ -1,14 +1,14 @@
 package Codify.dashboard.service;
 
 
-import Codify.dashboard.dto.response.StudentResponseDto;
-import Codify.dashboard.dto.response.all.AccumulateResponseDto;
-import Codify.dashboard.dto.response.all.DashboardAllResponseDto;
-import Codify.dashboard.dto.response.all.FindResultDto;
-import Codify.dashboard.dto.response.week.AccumulateWeekResponseDto;
-import Codify.dashboard.dto.response.week.DashboardWeekResponseDto;
-import Codify.dashboard.dto.response.week.FindWeekResultDto;
-import Codify.dashboard.dto.response.week.WeekDataDto;
+import Codify.dashboard.dto.dashboard.response.StudentDashboardResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.AccumulateResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.DashboardAllResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.FindResultDto;
+import Codify.dashboard.dto.dashboard.response.week.AccumulateWeekResponseDto;
+import Codify.dashboard.dto.dashboard.response.week.DashboardWeekResponseDto;
+import Codify.dashboard.dto.dashboard.response.week.FindWeekResultDto;
+import Codify.dashboard.dto.dashboard.response.week.WeekDataDto;
 import Codify.dashboard.repository.AssignmentRepository;
 import Codify.dashboard.repository.SubmissionRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ public class DashboardServiceTest {
     Long testSubjectId;
     List<FindResultDto> rawData;
     List<FindWeekResultDto> weekData;
-    List<StudentResponseDto> studentData;
+    List<StudentDashboardResponseDto> studentData;
 
     @BeforeEach
     void setUp() {
@@ -97,10 +97,10 @@ public class DashboardServiceTest {
         );
 
         studentData = Arrays.asList(
-                new StudentResponseDto(2000000L, "studentA"),
-                new StudentResponseDto(2000001L, "studentB"),
-                new StudentResponseDto(2000002L, "studentC"),
-                new StudentResponseDto(2000003L, "studentD")
+                new StudentDashboardResponseDto(2000000L, "studentA"),
+                new StudentDashboardResponseDto(2000001L, "studentB"),
+                new StudentDashboardResponseDto(2000002L, "studentC"),
+                new StudentDashboardResponseDto(2000003L, "studentD")
         );
     }
 
@@ -137,7 +137,7 @@ public class DashboardServiceTest {
         DashboardWeekResponseDto result = dashboardService.getWeekAccumulate(testUserUuid, testSubjectId);
 
         //then
-        assertThat(result.nodes()).extracting(StudentResponseDto::label).contains("studentA");
+        assertThat(result.nodes()).extracting(StudentDashboardResponseDto::label).contains("studentA");
         assertThat(result.edges()).extracting(WeekDataDto::week).contains(1L);
         assertThat(result.edges()).flatExtracting(WeekDataDto::data).extracting(AccumulateWeekResponseDto::id).contains("2000000-2000001");
 

@@ -1,16 +1,16 @@
 package Codify.dashboard.service;
 
-import Codify.dashboard.dto.response.*;
-import Codify.dashboard.dto.response.all.AccumulateResponseDto;
-import Codify.dashboard.dto.response.all.DashboardAllResponseDto;
-import Codify.dashboard.dto.response.all.FindResultDto;
-import Codify.dashboard.dto.response.data.DashboardDataDto;
-import Codify.dashboard.dto.response.data.SubjectDataDto;
-import Codify.dashboard.dto.response.data.UserDataDto;
-import Codify.dashboard.dto.response.week.AccumulateWeekResponseDto;
-import Codify.dashboard.dto.response.week.DashboardWeekResponseDto;
-import Codify.dashboard.dto.response.week.FindWeekResultDto;
-import Codify.dashboard.dto.response.week.WeekDataDto;
+import Codify.dashboard.dto.dashboard.response.StudentDashboardResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.AccumulateResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.DashboardAllResponseDto;
+import Codify.dashboard.dto.dashboard.response.all.FindResultDto;
+import Codify.dashboard.dto.dashboard.response.data.DashboardDataDto;
+import Codify.dashboard.dto.dashboard.response.data.SubjectDataDto;
+import Codify.dashboard.dto.dashboard.response.data.UserDataDto;
+import Codify.dashboard.dto.dashboard.response.week.AccumulateWeekResponseDto;
+import Codify.dashboard.dto.dashboard.response.week.DashboardWeekResponseDto;
+import Codify.dashboard.dto.dashboard.response.week.FindWeekResultDto;
+import Codify.dashboard.dto.dashboard.response.week.WeekDataDto;
 import Codify.dashboard.repository.AssignmentRepository;
 import Codify.dashboard.repository.SubjectRepository;
 import Codify.dashboard.repository.SubmissionRepository;
@@ -77,7 +77,7 @@ public class DashboardService {
                         })
                         .collect(Collectors.toList());
         //5. studentResponseDto리스트 생성
-        List<StudentResponseDto> studentList = submissionRepository.findStudentData(userUuid, subjectId);
+        List<StudentDashboardResponseDto> studentList = submissionRepository.findStudentData(userUuid, subjectId);
 
         return new DashboardAllResponseDto(studentList, accumulateList);
 
@@ -88,7 +88,7 @@ public class DashboardService {
     @Transactional(readOnly = true)
     public DashboardWeekResponseDto getWeekAccumulate(UUID userUuid, Long subjectId) {
 
-        List<StudentResponseDto> studentList = submissionRepository.findStudentData(userUuid, subjectId);
+        List<StudentDashboardResponseDto> studentList = submissionRepository.findStudentData(userUuid, subjectId);
         List<FindWeekResultDto> rawData = assignmentRepository.findWeekResults(userUuid.toString(), subjectId);
 
         //1. 주차별로 그룹화

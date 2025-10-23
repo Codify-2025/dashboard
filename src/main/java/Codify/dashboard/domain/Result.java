@@ -1,19 +1,25 @@
 package Codify.dashboard.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
 @Entity
-@Table(name = "Result")
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
+@Table(
+        name = "Result",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uk_result_assignment_from_to",
+                columnNames = {"assignmentId", "submission_from_id", "submission_to_id"}
+        )
+)
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resultId")
-    private Long resultId;
+    private Long id;
 
     @Column(name = "submission_from_id")
     private Long submissionFromId;
@@ -28,9 +34,15 @@ public class Result {
     private Long studentToId;
 
     @Column(name = "accumulateResult")
-    private Double accumulateResult;
+    private double accumulateResult;
 
     @Column(name = "assignmentId")
     private Long assignmentId;
 
+    @Column(name = "plagiarismJudge")
+    private Boolean plagiarismJudge;
+
+    public void updatePlagiarismJudge(Boolean plagiarismJudge) {
+        this.plagiarismJudge = plagiarismJudge;
+    }
 }

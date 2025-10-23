@@ -8,6 +8,14 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+
 @Getter
 @Entity
 @Table(name = "Submission")
@@ -36,4 +44,8 @@ public class Submission {
     @Column(name = "studentName")
     private String studentName;
 
+    @Column(name = "s3Key")
+    private String s3Key;
+
 }
+

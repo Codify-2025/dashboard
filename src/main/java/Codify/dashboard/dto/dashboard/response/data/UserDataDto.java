@@ -1,4 +1,4 @@
-package Codify.dashboard.dto.response.data;
+package Codify.dashboard.dto.dashboard.response.data;
 
 public record UserDataDto(String userId, String name) {
 }
